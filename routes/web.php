@@ -12,12 +12,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 Route::group(['middleware' => 'auth'], function(){
+
     Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home');
     Route::get('/folders/create', 'App\Http\Controllers\FolderController@showCreateForm')->name('folders.create');
     Route::post('/folders/create', 'App\Http\Controllers\FolderController@create');
@@ -32,3 +28,6 @@ Route::group(['middleware' => 'auth'], function(){
 
   });
 });
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
